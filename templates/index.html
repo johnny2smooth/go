@@ -2,12 +2,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
   </head>
   <body>
-    {{ range . }}
-    <h1>{{ .Title }}</h1>
-    <p>{{ .Body }}</p>
+    <div class="p-2">
+      <button
+        hx-post="/clicked"
+        hx-swap="outerHTML"
+        class="text-4xl border-2 border-solid border-black p-4"
+      >
+        Click me, baby! {{if .Count}} {{ .Count }} more time{{if
+        .IsPlural}}s{{end}} {{end}}
+      </button>
+    </div>
   </body>
-  {{ end }}
 </html>

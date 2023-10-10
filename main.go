@@ -4,25 +4,21 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+
+	"github.com/johnny2smooth/go/data"
 )
-
-type Content struct {
-	Title string
-	Body  string
-}
-
-var content = []Content{{Title: "hiyo", Body: "funker"}, {Title: "miso", Body: "funky"}}
 
 func handleHome(w http.ResponseWriter, r *http.Request) {
 	html, err := template.ParseFiles("./templates/index.html")
 	if err != nil {
 		fmt.Errorf("Ahhh!")
 	}
-	html.Execute(w, content)
+	html.Execute(w, data.MyCount)
 }
 
 func main() {
 	server := http.NewServeMux()
+	server.HandleFunc("/clicked", data.HandleClick)
 	server.HandleFunc("/", handleHome)
 
 	http.ListenAndServe("localhost:4321", server)

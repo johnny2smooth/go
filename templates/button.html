@@ -1,0 +1,7 @@
+<button
+  hx-post="/clicked"
+  hx-swap="outerHTML"
+  class="text-4xl border-2 border-solid border-black p-4"
+>
+  Click me, baby! {{ .Count }} more time{{if .IsPlural}}s{{end}}
+</button>
